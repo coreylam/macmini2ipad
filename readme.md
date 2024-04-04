@@ -27,6 +27,8 @@ crontab : 最后用 crontab，保障 local_svr 是启动的
 ipad + mac mini + 蓝牙键盘（带触控板）
 ipad + mac mini + 妙控键盘 + 蓝牙鼠标
 
+mac os： ventura 13.6
+
 ## 前提条件
 
 mac mini 开启 + ipad & mac mini 在同一局域网
