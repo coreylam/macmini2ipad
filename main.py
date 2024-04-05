@@ -95,9 +95,19 @@ def disconnect_ipad():
     import os
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
-    os.system("sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
     return index()
 
+@login_required
+def stop_ipad_task():
+    """ 暂停 ipad 连接/断开 任务
+
+    暂停 ipad 连接/断开 任务
+    """
+    import os
+    os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
+    os.system("/bvin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    return index()
 
 @login_required
 def logout():
@@ -127,11 +137,12 @@ def index():
     # put_markdown("- [首页](#)")
     put_markdown("- [连接 ipad](?app=connect_ipad)")
     put_markdown("- [断开 ipad](?app=disconnect_ipad)")
+    put_markdown("- [暂停任务](?app=stop_ipad_task)")
     # put_markdown("- [退出登录](?app=logout)")
     # put_link('点击这里', app='logout')
     # put_html(content)
 
 
 if __name__ == '__main__':
-    apps = [index, connect_ipad, disconnect_ipad, logout]
+    apps = [index, connect_ipad, disconnect_ipad, stop_ipad_task, logout]
     pywebio.start_server(apps, port=80)

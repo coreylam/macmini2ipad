@@ -27,8 +27,9 @@ crontab : 最后用 crontab，保障 local_svr 是启动的
 ipad + mac mini + 蓝牙键盘（带触控板）
 ipad + mac mini + 妙控键盘 + 蓝牙鼠标
 
-mac os： ventura 13.6
-
+MacOS:
+- ventura 13.6 (使用sidecar脚本 sidecar_13_6.applescript)
+- sonoma 14.4.1 (使用sidecar脚本 sidecar_14_4.applescript)
 ## 前提条件
 
 mac mini 开启 + ipad & mac mini 在同一局域网

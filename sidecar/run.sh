@@ -23,7 +23,7 @@ stop() {
 start() {
     # todo: 需要根据情况自行实现
     # python /data/release/tools/main.py &
-    sh /Users/coreylin/Desktop/topic/sidecar/run_sidecar.sh > /Users/coreylin/Desktop/topic/sidecar/debug.log &
+    /bin/sh /Users/coreylin/Desktop/topic/sidecar/run_sidecar.sh > /Users/coreylin/Desktop/topic/sidecar/debug.log &
 } 
 
 # health_check: 健康检查，但进程不存在时自动拉起
