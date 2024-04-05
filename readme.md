@@ -1,5 +1,7 @@
 # ipad + mac mini 自动随航
 
+- [博客园文章介绍](https://www.cnblogs.com/coreylin/p/18116300)
+
 ## Feature
 
 sidecar：
