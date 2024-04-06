@@ -105,7 +105,7 @@ def stop_ipad_task():
     """
     # os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
     os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh stop")
-    return
+    return index()
 
 @login_required
 def logout():
