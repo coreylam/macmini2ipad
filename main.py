@@ -1,4 +1,5 @@
 import functools
+import os
 import pywebio
 from pywebio.input import *
 from pywebio.output import *
@@ -79,7 +80,6 @@ def connect_ipad():
 
     触发随航连接ipad
     """
-    import os
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
     os.system("echo '1' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
     os.system("sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
@@ -92,7 +92,6 @@ def disconnect_ipad():
 
     触发随航断开 ipad
     """
-    import os
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
     os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
@@ -104,10 +103,9 @@ def stop_ipad_task():
 
     暂停 ipad 连接/断开 任务
     """
-    import os
-    os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
-    os.system("/bvin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
-    return index()
+    # os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
+    os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh stop")
+    return
 
 @login_required
 def logout():
@@ -120,24 +118,23 @@ def logout():
     clear()
     return index()
 
-def on_link_click():
-    put_text('链接被点击了！')
-    import time
-    time.sleep(5)
-    return index()
-
 @login_required
 def index():
     """ 首页
     """
-    # applications = {f.__name__: f for f in apps if f.__name__ not in ['index']}
-    # content = get_static_index_content(applications)
+    clear()
     put_markdown("# Welcome to visit MacMini server")
     put_markdown("---")
-    # put_markdown("- [首页](#)")
-    put_markdown("- [连接 ipad](?app=connect_ipad)")
-    put_markdown("- [断开 ipad](?app=disconnect_ipad)")
-    put_markdown("- [暂停任务](?app=stop_ipad_task)")
+    options = {
+        # "index": index,
+        "连接 iPad": connect_ipad,
+        "断开 iPad": disconnect_ipad,
+        "关闭自动随航": stop_ipad_task
+    }
+    selected_option = select("Mac2ipad 自动随航功能", options=options)
+    print(type(selected_option))
+    options[selected_option]()
+    return index()
     # put_markdown("- [退出登录](?app=logout)")
     # put_link('点击这里', app='logout')
     # put_html(content)
