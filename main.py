@@ -83,6 +83,7 @@ def connect_ipad():
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
     os.system("echo '1' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
     os.system("sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    toast("已触发连接 iPad", color="success")
     return index()
 
 
@@ -95,6 +96,7 @@ def disconnect_ipad():
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
     os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
     os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    toast("已触发断开 iPad", color="success")
     return index()
 
 @login_required
@@ -103,8 +105,9 @@ def stop_ipad_task():
 
     暂停 ipad 连接/断开 任务
     """
-    # os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
-    os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh stop")
+    os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
+    os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    toast("已停止自动重连", color="success")
     return index()
 
 @login_required
@@ -126,7 +129,7 @@ def index():
     put_markdown("# Welcome to visit MacMini server")
     put_markdown("---")
     options = {
-        # "index": index,
+        "请选择功能": index,
         "连接 iPad": connect_ipad,
         "断开 iPad": disconnect_ipad,
         "关闭自动随航": stop_ipad_task
@@ -134,7 +137,7 @@ def index():
     selected_option = select("Mac2ipad 自动随航功能", options=options)
     print(type(selected_option))
     options[selected_option]()
-    return index()
+    # return index()
     # put_markdown("- [退出登录](?app=logout)")
     # put_link('点击这里', app='logout')
     # put_html(content)
