@@ -6,6 +6,7 @@ from pywebio.output import *
 from pywebio.session import *
 from pywebio.platform.page import get_static_index_content
 from tornado.web import create_signed_value, decode_signed_value
+from lib.sidecar import SidecarTask
 
 
 class LocalStorage():
@@ -80,9 +81,10 @@ def connect_ipad():
 
     触发随航连接ipad
     """
-    os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
-    os.system("echo '1' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
-    os.system("sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    SidecarTask.connect_ipad()
+    # os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
+    # os.system("echo '1' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
+    # os.system("sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
     toast("已触发连接 iPad", color="success")
     return index()
 
@@ -93,9 +95,10 @@ def disconnect_ipad():
 
     触发随航断开 ipad
     """
-    os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
-    os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
-    os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    SidecarTask.disconnect_ipad()
+    # os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/num")
+    # os.system("echo '0' > /Users/coreylin/Desktop/topic/sidecar/connect_flag")
+    # os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
     toast("已触发断开 iPad", color="success")
     return index()
 
@@ -105,8 +108,10 @@ def stop_ipad_task():
 
     暂停 ipad 连接/断开 任务
     """
-    os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
-    os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
+    SidecarTask.disable_task()
+
+    # os.system("echo '9' > /Users/coreylin/Desktop/topic/sidecar/num")
+    # os.system("/bin/sh /Users/coreylin/Desktop/topic/sidecar/run.sh health_check")
     toast("已停止自动重连", color="success")
     return index()
 
@@ -128,6 +133,13 @@ def index():
     clear()
     put_markdown("# Welcome to visit MacMini server")
     put_markdown("---")
+    connect_status = SidecarTask.get_connect_flag()
+    task_status = SidecarTask.get_task_status()
+    cur_status = SidecarTask.get_current_status()
+    put_markdown(f"当前连接状态：{cur_status}")
+    put_markdown(f"当前任务配置：{connect_status}")
+    put_markdown(f"任务开关: {task_status}")
+
     options = {
         "请选择功能": index,
         "连接 iPad": connect_ipad,
