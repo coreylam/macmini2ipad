@@ -1,10 +1,9 @@
 import functools
-import os
 import pywebio
 from pywebio.input import *
 from pywebio.output import *
 from pywebio.session import *
-from pywebio.platform.page import get_static_index_content
+# from pywebio.platform.page import get_static_index_content
 from tornado.web import create_signed_value, decode_signed_value
 from lib.sidecar import SidecarTask
 
@@ -102,6 +101,7 @@ def disconnect_ipad():
     toast("已触发断开 iPad", color="success")
     return index()
 
+
 @login_required
 def stop_ipad_task():
     """ 暂停 ipad 连接/断开 任务
@@ -115,6 +115,7 @@ def stop_ipad_task():
     toast("已停止自动重连", color="success")
     return index()
 
+
 @login_required
 def logout():
     """ 退出
@@ -125,6 +126,7 @@ def logout():
     toast("Logout Success !!", color='success')
     clear()
     return index()
+
 
 @login_required
 def index():
