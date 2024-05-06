@@ -30,8 +30,13 @@ ipad + mac mini + 蓝牙键盘（带触控板）
 ipad + mac mini + 妙控键盘 + 蓝牙鼠标
 
 MacOS:
-- ventura 13.6 (使用sidecar脚本 sidecar_13_6.applescript)
-- sonoma 14.4.1 (使用sidecar脚本 sidecar_14_4.applescript)
+- 使用sidecar脚本 sidecar.applescript
+替换其中的 `XXX‘s iPad` 为自己的设备名称，注意 `‘` 操作符
+```applescript
+set targetIndex to (my findLastTargetIndex("XXX‘s iPad", menuItems))
+```
+- ~~ventura 13.6 (使用sidecar脚本 sidecar_13_6.applescript)~~
+- ~~sonoma 14.4.1 (使用sidecar脚本 sidecar_14_4.applescript)~~
 ## 前提条件
 
 mac mini 开启 + ipad & mac mini 在同一局域网
